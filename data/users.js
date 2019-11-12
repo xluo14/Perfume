@@ -27,7 +27,17 @@ async function getAll(){
     return await usersCollection.find({}).toArray();
 }
 
-
+async function get(id){
+    const usersCollection = await users();
+    const { ObjectId } = require('mongodb');
+    const objId = ObjectId.createFromHexString(String(id))
+    const user = await usersCollection.findOne({ _id: objId });
+   
+    if (user === null) {
+      throw "No user with that id"
+    }
+    return user;
+}
 
 
 
@@ -36,3 +46,4 @@ async function getAll(){
 
 module.exports.create = create
 module.exports.getAll = getAll
+module.exports.get = get

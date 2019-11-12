@@ -25,10 +25,46 @@ async function create(name,companyName,introduction) {
     return newPerfumeData;
 }
 
-async function insertSize(){
-    
-}
+async function insertSize(perfumeID,newSize){
+    const perfumeCollection = await perfume();
+    const { ObjectId } = require('mongodb');
 
+    const objId = ObjectId.createFromHexString(String(perfumeID))
+
+
+    const updatedAnimal = {
+        $addToSet: {
+            size: {
+                $each:[newSize]
+            }
+        }
+    }
+
+    await perfumeCollection.updateOne({ _id: objId }, updatedAnimal);
+
+
+    return await this.get(objId);
+}
+async function insertLink(perfumeID,newLink){
+    const perfumeCollection = await perfume();
+    const { ObjectId } = require('mongodb');
+
+    const objId = ObjectId.createFromHexString(String(perfumeID))
+
+
+    const updatedAnimal = {
+        $addToSet: {
+            link: {
+                $each:[newLink]
+            }
+        }
+    }
+
+    await perfumeCollection.updateOne({ _id: objId }, updatedAnimal);
+
+
+    return await this.get(objId);
+}
 
 
 
@@ -38,7 +74,17 @@ async function getAll(){
 }
 
 
-
+async function get(id){
+    const perfumeCollection = await perfume();
+    const { ObjectId } = require('mongodb');
+    const objId = ObjectId.createFromHexString(String(id))
+    const perfumeD = await perfumeCollection.findOne({ _id: objId });
+   
+    if (perfumeD === null) {
+      throw "No perfume with that id"
+    }
+    return perfumeD;
+}
 
 
 
@@ -46,3 +92,5 @@ async function getAll(){
 module.exports.create = create
 module.exports.getAll = getAll
 module.exports.insertSize = insertSize
+module.exports.insertLink = insertLink
+module.exports.get = get
