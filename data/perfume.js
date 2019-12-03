@@ -1,5 +1,5 @@
 
-var mongoCollections = require("./collections");
+const mongoCollections = require("../config/mongoCollections");
 var perfume = mongoCollections.perfume;
 
 async function create(name,companyName,introduction) {

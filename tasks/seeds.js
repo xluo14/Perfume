@@ -1,7 +1,7 @@
 // give basic info for testing
 
-const dbConnection = require('./data/connection');
-const data = require('./data/');
+const dbConnection = require("../config/mongoCollections");
+const data = require('../data');
 const users = data.users;
 const perfume = data.perfume;
 

@@ -1,5 +1,5 @@
 
-var mongoCollections = require("./collections");
+const mongoCollections = require("../config/mongoCollections");
 var users = mongoCollections.users;
 // create user
 async function create(userName, Email,Gender,Age,hashedPassword,ifAdmin) {

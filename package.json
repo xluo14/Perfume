@@ -4,6 +4,7 @@
     "description": "",
     "main": "app.js",
     "scripts": {
+      "seed": "node ./tasks/seed.js",
       "test": "echo \"Error: no test specified\" && exit 1",
       "start": "node index.js"
     },
@@ -12,7 +13,10 @@
     "dependencies": {
       "express": "^4.17.1",
       "mongodb": "^3.3.3",
-      "node-uuid": "^1.4.7"
+      "node-uuid": "^1.4.7",
+      "express-handlebars": "^3.1.0",
+      "express-session": "^1.17.0",
+      "bcrypt": "^3.0.6"
     }
   }
   
