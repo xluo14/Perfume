@@ -27,6 +27,7 @@ async function getAll(){
     return await usersCollection.find({}).toArray();
 }
 
+//user 不会直接输入id, 只能根据用户名和密码来查找，储存在database里的密码已经hash过了，查找的时候需要bcrypt进行比较
 async function get(id){
     const usersCollection = await users();
     const { ObjectId } = require('mongodb');

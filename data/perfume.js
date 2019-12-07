@@ -86,11 +86,14 @@ async function get(id){
     return perfumeD;
 }
 
+async function getUserreview(userid){
 
-
+}
 
 module.exports.create = create
 module.exports.getAll = getAll
 module.exports.insertSize = insertSize
 module.exports.insertLink = insertLink
 module.exports.get = get
+module.exports.getUserreview =getUserreview
+g
