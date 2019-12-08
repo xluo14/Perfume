@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const data = require("../data");
 const perfumeData = data.Perfume;
-const animalData = data.animals;
+const userData = data.users;
 
 router.get("/", async (req, res) => {
     try {
@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
     } catch (e) {
       res.status(500).json({ error: e });
     }
-  });
+  });   
 
 router.post("/", async (req, res) => {
   const blogperfumeData = req.body;
@@ -36,9 +36,16 @@ router.post("/", async (req, res) => {
     const newperfume = await perfumeData.addperfume(
       blogperfumeData.title, 
       blogperfumeData.author,
-      blogperfumeData.content
+      blogperfumeData.content.productName,
+      blogperfumeData.content.picture,
+      blogperfumeData.content.companyName,
+      blogperfumeData.content.parameters,
+      blogperfumeData.content.briefIntro,
+      blogperfumeData.content.links,
+      blogperfumeData.content.detailInfo,
+      blogperfumeData.content.tags
       );
-    await animalData.addPerfume(blogperfumeData.author,newperfume._id);
+    await userData.addPerfume(blogperfumeData.author,newperfume._id);
     res.status(200).json(newperfume);
   } catch (e) {
     res.status(500).json({ error: e });
@@ -84,7 +91,7 @@ router.delete("/:id", async (req, res) => {
   }
   try {
     const removed = await perfumeData.removeperfume(req.params.id);
-    await animalData.deletePerfume(blogperfumeData.author.id,req.params.id);
+    await userData.deletePerfume(blogperfumeData.author.id,req.params.id);
     res.json(removed);
     } catch (e) {
     res.status(500).json({ error: e });
