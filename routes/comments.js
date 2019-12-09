@@ -11,6 +11,8 @@ router.post("/:perfumeId", async (req, res) => {
       }
       const perfumeId = req.params.perfumeId;
       const userId = req.query.userId;
+      const commentId = req.query.commentId;
+      const comment = req.query.commentId;
       try {
         await perfumeData.get(perfumeId);
       } catch (e) {
@@ -24,7 +26,8 @@ router.post("/:perfumeId", async (req, res) => {
         return;
       }
       try {
-        await perfumeData.likinguser(perfumeId, userId);
+        await perfumeData.commentinguser(perfumeId, userId, commentId, comment);
+        await userData.comment
         res.status(200).json();
       } catch (e) {
         res.status(500).json({ error: e });
@@ -51,7 +54,7 @@ router.delete("/:perfumeId", async (req, res) => {
     return;
     }
     try {
-    await perfumeData.unlikinguser(perfumeId, userId);
+    await perfumeData.decommentinguser(perfumeId, userId, commentId);
     res.status(200).json();
     } catch (e) {
     res.status(500).json({ error: e });
