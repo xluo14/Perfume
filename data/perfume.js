@@ -89,6 +89,12 @@ async function get(id){
 async function getUserreview(userid){
 
 }
+//add comment
+//for each comment：number of reported/dislikes/likes
+//add tags, number of likes and tramp for tags
+//search tag&name of perfume&#description#
+//search tag
+
 
 module.exports.create = create
 module.exports.getAll = getAll
