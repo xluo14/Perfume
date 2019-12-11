@@ -42,7 +42,7 @@ async function ifAuthenticated(userName,userPassword){
             return false;
         }
         //console.log(2);
-        return true;
+        return user;
      });
     
 }
