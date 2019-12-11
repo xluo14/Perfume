@@ -52,7 +52,7 @@ async function insertLink(perfumeID,newLink){
     const objId = ObjectId.createFromHexString(String(perfumeID))
 
 
-    const updatedAnimal = {
+    const updatedPerfume = {
         $addToSet: {
             link: {
                 $each:[newLink]
@@ -60,7 +60,7 @@ async function insertLink(perfumeID,newLink){
         }
     }
 
-    await perfumeCollection.updateOne({ _id: objId }, updatedAnimal);
+    await perfumeCollection.updateOne({ _id: objId }, updatedPerfume);
 
 
     return await this.get(objId);
@@ -96,10 +96,40 @@ async function getUserreview(userid){
 //search tag
 
 
+
+
+//add tags
+async function addTags(id,tagText){
+
+    const perfumeCollection = await perfume();
+    const { ObjectId } = require('mongodb');
+    const objId = ObjectId.createFromHexString(String(id))
+    const perfumeD = await perfumeCollection.findOne({ _id: objId });
+   
+    if (perfumeD === null) {
+      throw "No perfume with that id"
+    }
+    
+    const updatedTag = {
+        $addToSet: {
+            tag: {text:text,
+                likes:0,
+                dislikes:0
+            }
+        }
+    }
+    await animalsCollection.updateOne({ _id:objId}, updatedTag);
+    const newPerfume = await perfumeCollection.findOne({ _id: objId });
+    return newPerfume;
+}
+
+
+
+
+
 module.exports.create = create
 module.exports.getAll = getAll
 module.exports.insertSize = insertSize
 module.exports.insertLink = insertLink
 module.exports.get = get
 module.exports.getUserreview =getUserreview
-g
