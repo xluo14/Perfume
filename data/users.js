@@ -1,6 +1,8 @@
 
 const mongoCollections = require("../config/mongoCollections");
-var users = mongoCollections.users;
+const users = mongoCollections.users;
+
+
 const bcrypt = require("bcryptjs")
 // create user
 async function create(userName, Email,Gender,Age,hashedPassword,ifAdmin) {
@@ -12,6 +14,7 @@ async function create(userName, Email,Gender,Age,hashedPassword,ifAdmin) {
         Gender: Gender,
         Age: Age,
         hashedPassword:hashedPassword,
+        comments:[],
         ifAdmin:ifAdmin
     };
     const insertInfo = await usersCollection.insertOne(newUsers);
@@ -44,7 +47,6 @@ async function ifAuthenticated(userName,userPassword){
         //console.log(2);
         return user;
      });
-    
 }
 
 
@@ -142,6 +144,7 @@ async function AdminUpdate(userName,ifAdmin){
     }
     return user;
 }
+
 
 module.exports.create = create
 module.exports.getAll = getAll

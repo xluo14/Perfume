@@ -86,17 +86,12 @@ async function get(id){
     return perfumeD;
 }
 
-async function getUserreview(userid){
+async function getUserReview(id){
 
 }
 //add comment
 //for each comment：number of reported/dislikes/likes
-//add tags, number of likes and tramp for tags
 //search tag&name of perfume&#description#
-//search tag
-
-
-
 
 //add tags
 async function addTags(id,tagText){
@@ -112,17 +107,86 @@ async function addTags(id,tagText){
     
     const updatedTag = {
         $addToSet: {
-            tag: {text:text,
+            tags: {text:tagText,
                 likes:0,
                 dislikes:0
             }
         }
     }
-    await animalsCollection.updateOne({ _id:objId}, updatedTag);
+    await perfumeCollection.updateOne({ _id:objId}, updatedTag);
     const newPerfume = await perfumeCollection.findOne({ _id: objId });
     return newPerfume;
 }
 
+
+async function likeTags(id,tagText){
+
+    const perfumeCollection = await perfume();
+    const { ObjectId } = require('mongodb');
+    const objId = ObjectId.createFromHexString(String(id))
+    const perfumeD = await perfumeCollection.findOne({ _id: objId, "tags.text":tagText});
+   
+    if (perfumeD === null) {
+      throw "No perfume with that id"
+    }
+
+    for(var i = 0;i<perfumeD.tags.length;i++){
+        if(perfumeD.tags[i].text==tagText){
+            
+            var likes = perfumeD.tags[i].likes
+        }
+    }
+    
+    likes = likes + 1;
+    likes = parseInt(likes);
+    const updatedTag = {
+        $set: {
+            "tags.$.likes":likes
+        }
+    }
+    
+    await perfumeCollection.updateOne({  _id:objId,"tags.text":tagText}, updatedTag);
+    const newPerfume = await perfumeCollection.findOne({ _id: objId });
+    return newPerfume;
+}
+
+
+async function dislikeTags(id,tagText){
+
+    const perfumeCollection = await perfume();
+    const { ObjectId } = require('mongodb');
+    const objId = ObjectId.createFromHexString(String(id))
+    const perfumeD = await perfumeCollection.findOne({ _id: objId, "tags.text":tagText});
+   
+    if (perfumeD === null) {
+      throw "No perfume with that id"
+    }
+
+    for(var i = 0;i<perfumeD.tags.length;i++){
+        if(perfumeD.tags[i].text==tagText){
+            
+            var likes = perfumeD.tags[i].dislikes
+        }
+    }
+    
+    likes = likes + 1;
+    likes = parseInt(likes);
+    const updatedTag = {
+        $set: {
+            "tags.$.dislikes":likes
+        }
+    }
+    
+    await perfumeCollection.updateOne({  _id:objId,"tags.text":tagText}, updatedTag);
+    const newPerfume = await perfumeCollection.findOne({ _id: objId });
+    return newPerfume;
+}
+
+async function searchTag(tagText){
+    const perfumeCollection = await perfume();
+    const perfumeD = await perfumeCollection.find({ "tags.text": tagText }).toArray();
+    return perfumeD;   
+}
 
 
 
@@ -132,4 +196,10 @@ module.exports.getAll = getAll
 module.exports.insertSize = insertSize
 module.exports.insertLink = insertLink
 module.exports.get = get
-module.exports.getUserreview =getUserreview
+module.exports.getUserReview = getUserReview
+module.exports.addTags = addTags
+module.exports.likeTags = likeTags
+module.exports.dislikeTags = dislikeTags
+module.exports.searchTag = searchTag
+
+
