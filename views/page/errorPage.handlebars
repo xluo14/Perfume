@@ -1,0 +1,66 @@
+<head>
+    <meta charset="utf-8">
+    {{#ifEqual page "index"}}
+    <title>
+        Error page
+    </title>
+    {{/ifEqual}}
+    {{#ifEqual page "search"}}
+    <title>
+        Poeple Found
+    </title>
+    {{/ifEqual}}
+    {{#ifEqual page "details"}}
+    <title>
+        Person Found
+    </title>
+    {{/ifEqual}}
+
+    <link rel="stylesheet" href="/public/site.css">
+</head>
+
+<body>
+    {{#ifEqual page "index"}}
+    <h1>Error page</h1>
+    {{/ifEqual}}
+    {{#ifEqual page "search"}}
+    <h1>Poeple Found</h1>
+    {{/ifEqual}}
+    {{#ifEqual page "details"}}
+    <h1>Person Found</h1>
+    {{/ifEqual}}
+    <main>
+        {{#ifEqual error "400"}}
+        <p class="error">
+            Input error: {{message}}
+        </p>
+        {{/ifEqual}}
+        {{#ifEqual error "404"}}
+        {{#if personName}}
+        <p class="not-found">
+            We're sorry, but no results were found for {{personName}}.
+        </p>
+        {{/if}}
+        {{#if id}}
+        <p class="not-found">
+            We're sorry, but no results were found for ID {{id}}.
+        </p>
+        {{/if}}
+        {{#if message}}
+        <p class="not-found">
+            Error: {{message}}
+        </p>
+        {{/if}}
+        {{/ifEqual}}
+        {{#ifEqual error "500"}}
+        <p class="server-error">
+            Server error: {{message}}
+        </p>
+        {{/ifEqual}}
+        <nav>
+            <ol>
+                <li><a href="/">Make another search</a></li>
+            </ol>
+        </nav>
+    </main>
+</body>

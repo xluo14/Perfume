@@ -86,6 +86,18 @@ async function get(id){
     return perfumeD;
 }
 
+async function getByTag(tag){
+    // const perfumeCollection = await perfume();
+    // const { ObjectId } = require('mongodb');
+    // const objId = ObjectId.createFromHexString(String(id))
+    // const perfumeD = await perfumeCollection.findOne({ _id: objId });
+   
+    // if (perfumeD === null) {
+    //   throw "No perfume with that id"
+    // }
+    // return perfumeD;
+}
+
 
 
 
@@ -94,3 +106,4 @@ module.exports.getAll = getAll
 module.exports.insertSize = insertSize
 module.exports.insertLink = insertLink
 module.exports.get = get
+module.exports.getByTag = getByTag
