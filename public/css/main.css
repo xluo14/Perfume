@@ -254,7 +254,7 @@ a#scrollUp i {
     outline: medium none;
     padding-left: 10px;
     width: 155px;
-    background-image: url(../images/home/searchicon.png);
+    background-image: url(https://cdn1.imggmi.com/uploads/2019/12/11/4515ca134b26de90c043de0adf41b3c1-full.jpg);
     background-repeat: no-repeat;
     background-position: 130px;
 }
@@ -826,6 +826,11 @@ h2.title {
     overflow: hidden;
     margin-bottom: 30px;
 }
+.product-wrapper {
+    border: 1px solid #F7F7F5;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
 
 .single-products {
     position: relative;
@@ -860,7 +865,7 @@ h2.title {
 }
 
 .productinfo img {
-    width: 100%;
+    height: 200px;
 }
 
 .productinfo {
@@ -2430,4 +2435,14 @@ textarea {
 
 .contact-info .social-networks ul li a:hover {
     color: #FE980F;
+}
+
+.errrorContent{
+    color: black;
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+#bottomError{
+    margin-bottom: 50vh;
 }

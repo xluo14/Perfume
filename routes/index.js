@@ -5,7 +5,7 @@ const path = require("path");
 const constructorMethod = app => {
   app.use("/perfume", perfumeRoutes);
 
-  app.get("/user", userRoutes);
+  app.use("/user", userRoutes);
 
   app.get("/", (req,res)=>{
     res.sendFile(path.resolve("static/homePage.html"));

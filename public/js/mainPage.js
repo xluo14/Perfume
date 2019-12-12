@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     //将电话加入剪切板
     $("#phoneLink").click(async function (event) {
@@ -8,19 +7,38 @@ $(document).ready(function () {
         return false;
     });
 
-    //将邮箱加入剪切板
-    $("#emailLink").click(async function (event) {
-        event.preventDefault();
-        await navigator.clipboard.writeText("admin@gmail.com");
-        alert("Our email address \"admin@gmail.com\" has been added to your clipboard!");
-        return false;
-    });
+    // //将邮箱加入剪切板
+    // $("#emailLink").click(async function (event) {
+    //     event.preventDefault();
+    //     await navigator.clipboard.writeText("admin@gmail.com");
+    //     alert("Our email address \"admin@gmail.com\" has been added to your clipboard!");
+    //     return false;
+    // });
 
     $("#instagramLink").click(async function (event) {
-        await navigator.clipboard.writeText("https://www.google.com/");
-        alert("Our website \"https://www.google.com/\" has been added to your clipboard!");
+        event.preventDefault();
+        const url = window.location.href;
+        await navigator.clipboard.writeText(url);
+        alert("Our website \"" + url + "\" has been added to your clipboard!");
         window.open("https://www.instagram.com/");
         return false;
     });
 
+    $("#searchInput").on("keydown", function (event) {
+        if (event.which == 13 || event.keyCode == 13) {
+            event.preventDefault();
+            const searchContent = document.getElementById("searchInput").value;
+            window.location.href = "/perfume/search/" + searchContent;
+            return false;
+        }
+        return true;
+    });
+
+    let link = window.location.href.replace("http://localhost:3000/", "");
+    if (link != "") {
+        link.replace("/", "+");
+        link = "search?q=" + link;
+    }
+    $("#facebookLink").prop("href", "http://www.facebook.com/share.php?u=https://www.google.com/" + link);
+    $("#twitterLink").prop("href", "https://twitter.com/share?url=" + encodeURIComponent(window.location.href) + "&text=" + document.title, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
 });
