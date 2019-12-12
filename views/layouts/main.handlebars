@@ -43,8 +43,8 @@
                             <ul class="nav navbar-nav">
                                 <li><a target="_blank" href="#" id="facebookLink" title="Share on Facebook"><i
                                             class="fa fa-facebook"></i></a></li>
-                                <li><a id="twitterLink" href="#"><i class="fa fa-twitter"
-                                            title="Share on Twitter"></i></a></li>
+                                <li><a id="twitterLink" href="#" title="Share on Twitter"><i
+                                            class="fa fa-twitter"></i></a></li>
                                 <li><a id="instagramLink" href="#" title="Share on Instagram"><i
                                             class="fa fa-instagram"></i></a></li>
                             </ul>
@@ -67,9 +67,12 @@
                     <div class="col-md-8 clearfix">
                         <div class="shop-menu clearfix pull-right">
                             <ul class="nav navbar-nav">
-                                <li id="account" class="{{accountHidden}}"><a href=""><i class="fa fa-user"></i> Account</a></li>
-                                <li id="loglout" class="{{accountHidden}}"><a href=""><i class="fa fa-caret-square-o-right"></i> Logout</a></li>
-                                <li id="login" class="{{loginHidden}}"><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+                                <li id="account" class="{{accountHidden}}"><a href=""><i class="fa fa-user"></i>
+                                        Account</a></li>
+                                <li id="loglout" class="{{accountHidden}}"><a href=""><i
+                                            class="fa fa-caret-square-o-right"></i> Logout</a></li>
+                                <li id="login" class="{{loginHidden}}"><a href="login.html"><i class="fa fa-lock"></i>
+                                        Login</a></li>
                             </ul>
                         </div>
                     </div>
@@ -180,6 +183,9 @@
         </div>
     </footer>
 
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous"
+        src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0"></script>
     <script src="../../public/js/jquery.js"></script>
     <script src="../../public/js/bootstrap.min.js"></script>
     <script src="../../public/js/jquery.scrollUp.min.js"></script>
@@ -187,8 +193,6 @@
     <script src="../../public/js/jquery.prettyPhoto.js"></script>
     <script src="../../public/js/main.js"></script>
     <script src="../../public/js/mainPage.js"></script>
-    <script async defer crossorigin="anonymous"
-        src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0"></script>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 </body>

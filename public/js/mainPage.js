@@ -34,11 +34,19 @@ $(document).ready(function () {
         return true;
     });
 
+    $("#cart").click(function (event) {
+        event.preventDefault();
+        window.open($("#amazonLink")[0].href);
+        return false;
+    });
+
     let link = window.location.href.replace("http://localhost:3000/", "");
     if (link != "") {
         link.replace("/", "+");
         link = "search?q=" + link;
     }
     $("#facebookLink").prop("href", "http://www.facebook.com/share.php?u=https://www.google.com/" + link);
-    $("#twitterLink").prop("href", "https://twitter.com/share?url=" + encodeURIComponent(window.location.href) + "&text=" + document.title, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+    $("#fbshareLink").prop("href", "http://www.facebook.com/share.php?u=https://www.google.com/" + link);
+    $("#twitterLink", "#twshareLink").prop("href", "https://twitter.com/share?url=" + encodeURIComponent(window.location.href) + "&text=" + document.title, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+
 });

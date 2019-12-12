@@ -2443,6 +2443,24 @@ textarea {
     margin-bottom: 20px;
 }
 
-#bottomError{
+/* #bottomError{
     margin-bottom: 50vh;
+} */
+
+#fbshareLink{
+    display: flex;
+    height: 25px;
+    width: 65px;
+    color: white;
+    align-items: center;
+    padding-inline-start: 5px;
+    background-color: rgb(68, 153, 199);
+}
+
+#fbshareLink:hover{
+    background-color: rgb(55, 93, 136);
+}
+
+section{
+    min-height: 80vh;
 }
