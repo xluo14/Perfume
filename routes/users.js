@@ -24,12 +24,15 @@ const saltRounds = 8;
         res.status(400).json(e);
     } 
 }); */
+router.post('/',async(req,res)=>{
+
+});
 
 router.post('/login', async (req, res) => {
     let username = req.body.username;
     let userpassward=await bcrypt.hash(req.body.password, saltRounds);
     try{
-        const personinfor=await userData.get(username,userpassward); 
+        const personinfor=await userData.ifAuthenticated(username,userpassward); 
 
         const expiresAt = new Date();
         expiresAt.setHours(expiresAt.getHours() + 1);
@@ -45,7 +48,7 @@ router.post('/login', async (req, res) => {
         //     personid: personinfor['_id'] //隐藏部分，用于查询用户详细信息
         // });
     }catch(e){
-        res.status(401).render('posts/login',{error:'you did not provide a valid username and/or password'});
+        res.status(401).render('page/errorPage',{errorMessage:'you did not provide a valid username and/or password'});
     }
 
   }); 
@@ -59,7 +62,7 @@ router.post('/new',async(req,res)=>{
     let hashedPassword=await bcrypt.hash(req.body.hashedPassword, saltRounds);
     let ifAdmin= req.body.ifAdmin;
     try{
-        const newuser=await userData.create(userName, Email,Gender,Age,hashedPassword,ifAdmin);
+        const newuser=await userData.create(userName, Email,Gender,Age,hashedPassword);
 
         const expiresAt = new Date();
         expiresAt.setHours(expiresAt.getHours() + 1);
@@ -79,11 +82,11 @@ router.post('/new',async(req,res)=>{
 
 router.post('/user_homepage',async(req,res)=>{
     var personreview=await perfumeData.getUserreview(req.session.AuthCookie['_id']);
-    res.render('page/personal_page',{
+    res.render('page/userPage',{
         userName:req.session.AuthCookie['userName'],
-        Email:req.session.AuthCookie['Email'],
+        emailAddress:req.session.AuthCookie['Email'],
         Gender:req.session.AuthCookie['Gender'],
         Age:req.session.AuthCookie['Age'],
-        personreview:personreview
+        userReviews:personreview
     });
 });
