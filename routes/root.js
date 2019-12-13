@@ -6,11 +6,10 @@ const userData = data.users;
 
 router.get("/", async (req, res) => {
     try {
-      const perfumeList = await perfumeData.getAll();
-      
-      res.render('/page/homepage');
+      res.render('page/homepage',{title:"home"});
+
     } catch (e) {
-      res.status(500).json({ error: e });
+        res.status(500).render("/page/errorPage",{ error: e });
     }
   });  
 
