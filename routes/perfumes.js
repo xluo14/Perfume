@@ -8,6 +8,7 @@ router.get("/", async (req, res) => {
     try {
       const perfumeList = await perfumeData.getAll();
       res.json(perfumeList);
+      
     } catch (e) {
       res.status(500).json({ error: e });
     }
