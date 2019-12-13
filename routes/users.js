@@ -25,20 +25,20 @@ const saltRounds = 8;
         res.status(400).json(e);
     } 
 }); */
-// router.get("/", async (req, res) => { 
-//     try {     
-//         if (req.session.cookie.expires!=false && req.session.cookie.expires!=null){
-//             // anHourAgo.setHours(anHourAgo.getHours() - 1);
-//             // res.clearCookie('AuthCookie');
-//             res.redirect('/user_homepage');
-//         }
-//         else{
-//             res.render('page/loginPage',{error:''});
-//         }
-//     } catch (e) {     
-//         res.json('error'); 
-//     }
-// });
+router.get("/", async (req, res) => { 
+    try {     
+        if (req.session.cookie.expires!=false && req.session.cookie.expires!=null){
+            // anHourAgo.setHours(anHourAgo.getHours() - 1);
+            // res.clearCookie('AuthCookie');
+            res.redirect('/user_homepage');
+        }
+        else{
+            res.render('page/loginPage',{error:''});
+        }
+    } catch (e) {     
+        res.json('error'); 
+    }
+});
 
 router.post('/login', async (req, res) => {
     let username = req.body.username;
@@ -51,7 +51,7 @@ router.post('/login', async (req, res) => {
         req.session.cookie.expires=expiresAt;
         req.session.AuthCookie=personinfor;
 
-        res.redirect('users/user_homepage');
+        res.redirect('/user_homepage');
 
         // const personreview=await perfumeData.getUserreview(personinfor['_id']);
         // res.render("user/my_homepage",{
@@ -80,7 +80,7 @@ router.post('/new',async(req,res)=>{
         req.session.cookie.expires=expiresAt;
         req.session.AuthCookie=newuser;
 
-        res.redirect('users/user_homepage');
+        res.redirect('/user_homepage');
         // res.render("user/my homepage",{
         //     title:personinfor['userName'], // header 形式， 做成链接
         //     perfumereview:[],
@@ -91,8 +91,8 @@ router.post('/new',async(req,res)=>{
     }
 });
 
-router.post('/user_homepage',async(req,res)=>{
-    var usercomments=req.AuthCookie['comments'];
+router.get('/user_homepage',async(req,res)=>{
+    var usercomments=req.session.AuthCookie['comments'];
     var commentlist=[];
     for (i=0;i<usercomments.length;i++){
         var com=await comments.get(usercomments[i]['_id']);
