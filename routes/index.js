@@ -1,16 +1,18 @@
-const rootRoutes = require("./root");
-const userRoutes = require("./users");
 const perfumeRoutes = require("./perfumes");
-const commentRoutes = require("./comments")
+const userRoutes = require("./users");
+const path = require("path");
 
 const constructorMethod = app => {
-  app.use("/", rootRoutes);
-  app.use("/users",userRoutes);
-  app.use("/perfumes",perfumeRoutes);
-  app.use("/comments",commentRoutes);
+  app.use("/perfume", perfumeRoutes);
+
+  app.use("/user", userRoutes);
+
+  app.get("/", (req,res)=>{
+    res.sendFile(path.resolve("static/homePage.html"));
+  });
 
   app.use("*", (req, res) => {
-    res.redirect("/");
+    res.status(404).render("page/errorPage", {errorMessage: "Page Not Found!"});
   });
 };
 
