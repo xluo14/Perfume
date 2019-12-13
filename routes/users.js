@@ -60,7 +60,6 @@ router.post('/new',async(req,res)=>{
     let Gender=req.body.Gender;
     let Age=req.body.Age;
     let hashedPassword=await bcrypt.hash(req.body.hashedPassword, saltRounds);
-    let ifAdmin= req.body.ifAdmin;
     try{
         const newuser=await userData.create(userName, Email,Gender,Age,hashedPassword);
 
