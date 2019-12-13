@@ -7,7 +7,7 @@ const path = require("path");
 const constructorMethod = app => {
   app.use("/", rootRoutes);
   app.use("/users",userRoutes);
-  app.use("/perfume",perfumeRoutes);
+  app.use("/perfumes",perfumeRoutes);
   app.use("/comments",commentRoutes);
 
   app.use("*", (req, res) => {
